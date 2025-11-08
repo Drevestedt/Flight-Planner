@@ -18,3 +18,8 @@ fetch('https://avancera.app/cities/')
       toDestination.appendChild(toOption)
     }
   })
+
+// Fånga upp formulärvalen och skicka dessa till infosidan
+let formSubmit = document.querySelector('form')
+
+formSubmit.addEventListener('submit',)
