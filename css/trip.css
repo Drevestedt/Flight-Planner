@@ -90,6 +90,13 @@ main > * {
   margin-right: 1.8em;
 }
 
+#result-info .data-display {
+  background-color: #2d3748;
+  min-height: 450px;
+  min-width: 800px;
+  border-radius: 20px;
+}
+
 #chart {
   background-color: #00bfa6;
   color: #f7fafc;
@@ -103,13 +110,12 @@ main > * {
   align-items: center;
 }
 
-/*#hero h2 {
-  margin-top: 2em;
-  margin-bottom: 0;
+#chart .data-display {
   background-color: #2d3748;
-  padding: 0.5em 1em;
-  border-radius: 15px;
-}*/
+  min-height: 450px;
+  min-width: 800px;
+  border-radius: 20px;
+}
 
 /* Footer */
 footer {
