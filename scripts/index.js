@@ -19,7 +19,21 @@ fetch('https://avancera.app/cities/')
     }
   })
 
-// Fånga upp formulärvalen och skicka dessa till infosidan
+// Fånga upp formulärvalen och spara dessa i local storage
 let formSubmit = document.querySelector('form')
 
-formSubmit.addEventListener('submit',)
+formSubmit.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  let fromOption = formSubmit.querySelector('#dest-from').value
+  let toOption = formSubmit.querySelector('#dest-to').value
+  let dateOption = formSubmit.querySelector('#flight-date').value
+
+  let flightPlan = {
+    'from': fromOption,
+    'to': toOption,
+    'date': dateOption
+  }
+
+  localStorage.setItem('flightPlan', JSON.stringify(flightPlan))
+})
