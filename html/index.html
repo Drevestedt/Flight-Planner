@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags / SEO -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Flight Planner</title>
+
+    <!-- Link elements -->
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="icon" href="/assets/favicon.png" type="icon/png" />
+  </head>
+  <body>
+    <!-- Header and Navbar -->
+    <header>
+      <h1><a href="index.html">Flight Planner</a></h1>
+      <nav>
+        <ul>
+          <li><a href="#">Planera resa</a></li>
+          <li><a href="trip.html">Mina resor</a></li>
+          <li><a href="#">Uppdatera städer</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main -->
+    <main>
+      <section id="hero">
+        <h2>Planera din nästa resa</h2>
+        <form action="#" method="POST">
+          <div id="city-choice">
+            <label for="dest-from">Från:</label>
+            <select name="dest-from" id="dest-from">
+              <option value="">Välj</option>
+            </select>
+
+            <label for="dest-to">Till:</label>
+            <select name="dest-to" id="dest-to">
+              <option value="">Välj</option>
+            </select>
+          </div>
+
+          <div id="date-option">
+            <label for="flight-date">Datum:</label>
+            <input type="date" name="flight-date" id="flight-date" />
+          </div>
+
+          <div id="submit-button">
+            <input type="button" value="Slutför" id="form-button" />
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer><p>&copy; 2025 Drevestedt:: Development</p></footer>
+
+    <!-- JS Script -->
+    <script src="/scripts/index.js"></script>
+  </body>
+</html>
