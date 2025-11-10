@@ -96,6 +96,40 @@ main > * {
   min-height: 450px;
   min-width: 800px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#result-info .from {
+  display: flex;
+  gap: 10em;
+}
+
+#result-info .to {
+  display: flex;
+  gap: 10em;
+}
+
+#result-info .date-time {
+  display: flex;
+  gap: 10em;
+}
+
+#result-info button {
+  padding: 0.5em 2em;
+  font-size: 70%;
+  background-color: #1e90ff;
+  color: #f7fafc;
+  border: none;
+  border-radius: 5px;
+  font-weight: 550;
+  margin-top: 5em;
+}
+
+#result-info button:hover {
+  background-color: #1673cf;
+  color: #d2d3d3;
 }
 
 #chart {
