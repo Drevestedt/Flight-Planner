@@ -103,17 +103,17 @@ main > * {
 
 #result-info .from {
   display: flex;
-  gap: 10em;
+  gap: 0.5em;
 }
 
 #result-info .to {
   display: flex;
-  gap: 10em;
+  gap: 0.5em;
 }
 
 #result-info .date-time {
   display: flex;
-  gap: 10em;
+  gap: 0.5em;
 }
 
 #result-info button {
