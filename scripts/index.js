@@ -19,7 +19,8 @@ fetch('https://avancera.app/cities/')
     }
   })
 
-// Fånga upp formulärvalen och spara dessa i local storage
+// Fånga upp formulärvalen och spara dessa i local storage,
+// samt skicka användaren till trip-sidan
 let formSubmit = document.querySelector('form')
 
 formSubmit.addEventListener('submit', (e) => {
@@ -36,4 +37,6 @@ formSubmit.addEventListener('submit', (e) => {
   }
 
   localStorage.setItem('flightPlan', JSON.stringify(flightPlan))
+
+  window.location.href = 'trip.html'
 })
