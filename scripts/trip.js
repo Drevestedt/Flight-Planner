@@ -1,7 +1,3 @@
-fetch('https://airportsapi.com/api/countries/SE/airports')
-  .then(response => response.json())
-  .then(data => console.log(data))
-
 // Hämta objekt-data från local storage och visa dessa för användaren
 let flightPlan = JSON.parse(localStorage.getItem('flightPlan'))
 let fromCity = flightPlan.from
@@ -31,6 +27,29 @@ newDateInfo.textContent = date
 newDateInfo.style.marginRight = '5em'
 newDateInfo.style.color = 'rgba(255, 255, 0, 0.861)'
 firstDateP.insertAdjacentElement('afterend', newDateInfo)
+
+// Hämta flygplatsdata från airports api:et och visa för användaren
+fetch('https://airportsapi.com/api/countries/SE/airports')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data) // Glöm ej att ta bort denna
+    for (let i = 0; i < data.data.length; i++) {
+      let airportInfo = data.data[i].attributes
+      let cityName = airportInfo.name
+      console.log(cityName)
+      let airportCode = airportInfo.code
+
+      if (cityName.toLowerCase().includes(fromCity.toLowerCase())) {
+        let secondFromP = fromInfo.querySelectorAll('p')[2]
+        let airportCodeP = document.createElement('p')
+        airportCodeP.textContent = airportCode
+        airportCodeP.style.marginRight = '5em'
+        airportCodeP.style.color = 'rgba(255, 255, 0, 0.861)'
+        secondFromP.insertAdjacentElement('afterend', airportCodeP)
+        // Lägg till ifall det behövs gå till nästa sida i API:et
+      }
+    }
+  })
 
 // Rensa flygrutt från local storage och gå till start-sidan
 let clearButton = document.querySelector('button')
