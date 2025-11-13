@@ -91,9 +91,19 @@ fetch('https://airportsapi.com/api/countries/SE/airports')
   })
 
 // Rensa flygrutt från local storage och gå till start-sidan
+// Via knappen
 let clearButton = document.querySelector('button')
 
 clearButton.addEventListener('click', () => {
+  localStorage.clear()
+  window.location.href = 'index.html'
+})
+
+// Rensa flygrutt från local storage och gå till start-sidan
+// Via länken i Navbaren
+let clearLink = document.querySelector('#navLinkOne')
+
+clearLink.addEventListener('click', () => {
   localStorage.clear()
   window.location.href = 'index.html'
 })
