@@ -53,7 +53,8 @@ fetch('https://airportsapi.com/api/countries/SE/airports')
       if (!cityFound) {
         let nextPage = data.links.next
         let newResponse = await fetch(nextPage)
-        let newData = newResponse.json()
+        let newData = await newResponse.json()
+        data = newData
       }
     }
   })
