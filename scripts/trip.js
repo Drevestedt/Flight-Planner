@@ -28,7 +28,7 @@ newDateInfo.style.marginRight = '5em'
 newDateInfo.style.color = 'rgba(255, 255, 0, 0.861)'
 firstDateP.insertAdjacentElement('afterend', newDateInfo)
 
-// Hämta flygplatsdata från airports api:et och visa för användaren
+// Flygplatsdata för från stad som ska visas för användaren
 fetch('https://airportsapi.com/api/countries/SE/airports')
   .then(response => response.json())
   .then(async data => {
@@ -47,6 +47,37 @@ fetch('https://airportsapi.com/api/countries/SE/airports')
           airportCodeP.style.marginRight = '5em'
           airportCodeP.style.color = 'rgba(255, 255, 0, 0.861)'
           secondFromP.insertAdjacentElement('afterend', airportCodeP)
+          cityFound = true
+        }
+      }
+      if (!cityFound) {
+        let nextPage = data.links.next
+        let newResponse = await fetch(nextPage)
+        let newData = await newResponse.json()
+        data = newData
+      }
+    }
+  })
+
+// Flygplatsdata för till stad som ska visas för användaren
+fetch('https://airportsapi.com/api/countries/SE/airports')
+  .then(response => response.json())
+  .then(async data => {
+    let cityFound = false
+
+    while (cityFound === false) {
+      for (let i = 0; i < data.data.length; i++) {
+        let airportInfo = data.data[i].attributes
+        let cityName = airportInfo.name
+        let airportCode = airportInfo.code
+
+        if (cityName.toLowerCase().includes(toCity.toLowerCase())) {
+          let secondToP = toInfo.querySelectorAll('p')[2]
+          let airportCodeP = document.createElement('p')
+          airportCodeP.textContent = airportCode
+          airportCodeP.style.marginRight = '5em'
+          airportCodeP.style.color = 'rgba(255, 255, 0, 0.861)'
+          secondToP.insertAdjacentElement('afterend', airportCodeP)
           cityFound = true
         }
       }
