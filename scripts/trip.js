@@ -31,22 +31,29 @@ firstDateP.insertAdjacentElement('afterend', newDateInfo)
 // Hämta flygplatsdata från airports api:et och visa för användaren
 fetch('https://airportsapi.com/api/countries/SE/airports')
   .then(response => response.json())
-  .then(data => {
-    console.log(data) // Glöm ej att ta bort denna
-    for (let i = 0; i < data.data.length; i++) {
-      let airportInfo = data.data[i].attributes
-      let cityName = airportInfo.name
-      console.log(cityName)
-      let airportCode = airportInfo.code
+  .then(async data => {
+    let cityFound = false
 
-      if (cityName.toLowerCase().includes(fromCity.toLowerCase())) {
-        let secondFromP = fromInfo.querySelectorAll('p')[2]
-        let airportCodeP = document.createElement('p')
-        airportCodeP.textContent = airportCode
-        airportCodeP.style.marginRight = '5em'
-        airportCodeP.style.color = 'rgba(255, 255, 0, 0.861)'
-        secondFromP.insertAdjacentElement('afterend', airportCodeP)
-        // Lägg till ifall det behövs gå till nästa sida i API:et
+    while (cityFound === false) {
+      for (let i = 0; i < data.data.length; i++) {
+        let airportInfo = data.data[i].attributes
+        let cityName = airportInfo.name
+        let airportCode = airportInfo.code
+
+        if (cityName.toLowerCase().includes(fromCity.toLowerCase())) {
+          let secondFromP = fromInfo.querySelectorAll('p')[2]
+          let airportCodeP = document.createElement('p')
+          airportCodeP.textContent = airportCode
+          airportCodeP.style.marginRight = '5em'
+          airportCodeP.style.color = 'rgba(255, 255, 0, 0.861)'
+          secondFromP.insertAdjacentElement('afterend', airportCodeP)
+          cityFound = true
+        }
+      }
+      if (!cityFound) {
+        let nextPage = data.links.next
+        let newResponse = await fetch(nextPage)
+        let newData = newResponse.json()
       }
     }
   })
