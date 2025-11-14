@@ -1,3 +1,15 @@
+// Kolla att det finns en planerad resa sparad innan sidan kan fås tillgång till
+let tripPage = document.querySelector('#tripPage')
+
+tripPage.addEventListener('click', (e) => {
+  if (localStorage.getItem('flightPlan')) {
+    window.location.href = 'trip.html'
+  } else {
+    e.preventDefault()
+    alert('Du har ingen sparad resa')
+  }
+})
+
 // Hämta städerna från API:et och lägg till dem i drop-down menyerna
 fetch('https://avancera.app/cities/')
   .then(response => response.json())
