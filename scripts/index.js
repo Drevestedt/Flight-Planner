@@ -23,20 +23,28 @@ fetch('https://avancera.app/cities/')
 // samt skicka användaren till trip-sidan
 let formSubmit = document.querySelector('form')
 
+function valueCheck(fromOption, toOption, dateOption) {
+  if (fromOption === "" || toOption === "" || dateOption === "") {
+    alert('Fyll i alla fält!')
+  } else {
+    let flightPlan = {
+      'from': fromOption,
+      'to': toOption,
+      'date': dateOption
+    }
+    localStorage.setItem('flightPlan', JSON.stringify(flightPlan))
+
+    window.location.href = 'trip.html'
+  }
+}
+
 formSubmit.addEventListener('submit', (e) => {
   e.preventDefault()
 
-  let fromOption = formSubmit.querySelector('#dest-from').value
-  let toOption = formSubmit.querySelector('#dest-to').value
-  let dateOption = formSubmit.querySelector('#flight-date').value
+  fromOption = formSubmit.querySelector('#dest-from').value
+  toOption = formSubmit.querySelector('#dest-to').value
+  dateOption = formSubmit.querySelector('#flight-date').value
 
-  let flightPlan = {
-    'from': fromOption,
-    'to': toOption,
-    'date': dateOption
-  }
 
-  localStorage.setItem('flightPlan', JSON.stringify(flightPlan))
-
-  window.location.href = 'trip.html'
+  valueCheck(fromOption, toOption, dateOption)
 })
