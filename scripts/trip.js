@@ -100,10 +100,16 @@ clearButton.addEventListener('click', () => {
 })
 
 // Rensa flygrutt från local storage och gå till start-sidan
-// Via länken i Navbaren
+// Via länkar i Navbaren
 let clearLink = document.querySelector('#navLinkOne')
+let clearNameLink = document.querySelector('h1')
 
 clearLink.addEventListener('click', () => {
+  localStorage.clear()
+  window.location.href = 'index.html'
+})
+
+clearNameLink.addEventListener('click', () => {
   localStorage.clear()
   window.location.href = 'index.html'
 })
