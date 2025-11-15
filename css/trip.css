@@ -98,22 +98,27 @@ main > * {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 #result-info .from {
   display: flex;
   gap: 0.5em;
+  margin-left: 5em;
 }
 
 #result-info .to {
   display: flex;
   gap: 0.5em;
+  margin-left: 5em;
 }
 
 #result-info .date-time {
   display: flex;
   gap: 0.5em;
+  margin-top: 1em;
+  margin-left: 5em;
 }
 
 #result-info button {
@@ -124,7 +129,7 @@ main > * {
   border: none;
   border-radius: 5px;
   font-weight: 550;
-  margin-top: 5em;
+  margin-top: 3em;
 }
 
 #result-info button:hover {
@@ -151,6 +156,9 @@ main > * {
   min-height: 450px;
   min-width: 800px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Footer */

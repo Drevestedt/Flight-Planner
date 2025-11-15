@@ -113,3 +113,16 @@ clearNameLink.addEventListener('click', () => {
   localStorage.clear()
   window.location.href = 'index.html'
 })
+
+// Räkna ut ungefärlig flygtid och visa för användaren
+fetch('https://airportsapi.com/api/countries/SE/airports')
+  .then(result => result.json())
+  .then(data => {
+    let lat = null
+    let long = null
+
+    for (let i = 0; i < data.data.length; i++) {
+      lat = data.data[i].attributes.latitude
+      long = data.data[i].attributes.longitude
+    }
+  })
