@@ -115,14 +115,66 @@ clearNameLink.addEventListener('click', () => {
 })
 
 // Räkna ut ungefärlig flygtid och visa för användaren
+// Från-stad koordinater
 fetch('https://airportsapi.com/api/countries/SE/airports')
   .then(result => result.json())
-  .then(data => {
-    let lat = null
-    let long = null
+  .then(async data => {
+    let cityMatch = false
+    let fromLat = null
+    let fromLong = null
 
-    for (let i = 0; i < data.data.length; i++) {
-      lat = data.data[i].attributes.latitude
-      long = data.data[i].attributes.longitude
+    while (cityMatch === false) {
+      for (let i = 0; i < data.data.length; i++) {
+        let cityName = data.data[i].attributes.name
+
+        if (cityName.toLowerCase().includes(fromCity.toLowerCase())) {
+          fromLat = data.data[i].attributes.latitude
+          fromLong = data.data[i].attributes.longitude
+          cityMatch = true
+          break;
+        }
+      }
+
+      if (!cityMatch) {
+        let nextPage = data.links.next
+        let newResponse = await fetch(nextPage)
+        let newData = await newResponse.json()
+        data = newData
+      }
     }
+
+    console.log(fromLat)
+    console.log(fromLong)
+  })
+
+// Till-stads koordinater
+fetch('https://airportsapi.com/api/countries/SE/airports')
+  .then(result => result.json())
+  .then(async data => {
+    let cityMatch = false
+    let toLat = null
+    let toLong = null
+
+    while (cityMatch === false) {
+      for (let i = 0; i < data.data.length; i++) {
+        let cityName = data.data[i].attributes.name
+
+        if (cityName.toLowerCase().includes(toCity.toLowerCase())) {
+          toLat = data.data[i].attributes.latitude
+          toLong = data.data[i].attributes.longitude
+          cityMatch = true
+          break;
+        }
+      }
+
+      if (!cityMatch) {
+        let nextPage = data.links.next
+        let newResponse = await fetch(nextPage)
+        let newData = await newResponse.json()
+        data = newData
+      }
+    }
+
+    console.log(toLat)
+    console.log(toLong)
   })
