@@ -115,66 +115,76 @@ clearNameLink.addEventListener('click', () => {
 })
 
 // Räkna ut ungefärlig flygtid och visa för användaren
-// Från-stad koordinater
-fetch('https://airportsapi.com/api/countries/SE/airports')
-  .then(result => result.json())
-  .then(async data => {
-    let cityMatch = false
-    let fromLat = null
-    let fromLong = null
+async function getCoordinates() {
+  // Från-stad koordinater
+  let fromLat = null
+  let fromLong = null
 
-    while (cityMatch === false) {
-      for (let i = 0; i < data.data.length; i++) {
-        let cityName = data.data[i].attributes.name
+  let fromResponse = await fetch('https://airportsapi.com/api/countries/SE/airports')
+  let fromData = await fromResponse.json()
+  let fromCityMatch = false
 
-        if (cityName.toLowerCase().includes(fromCity.toLowerCase())) {
-          fromLat = data.data[i].attributes.latitude
-          fromLong = data.data[i].attributes.longitude
-          cityMatch = true
-          break;
-        }
-      }
+  while (fromCityMatch === false) {
+    for (let i = 0; i < fromData.data.length; i++) {
+      let fromCityName = fromData.data[i].attributes.name
 
-      if (!cityMatch) {
-        let nextPage = data.links.next
-        let newResponse = await fetch(nextPage)
-        let newData = await newResponse.json()
-        data = newData
+      if (fromCityName.toLowerCase().includes(fromCity.toLowerCase())) {
+        fromLat = fromData.data[i].attributes.latitude
+        fromLong = fromData.data[i].attributes.longitude
+        fromCityMatch = true
+        break;
       }
     }
 
-    console.log(fromLat)
-    console.log(fromLong)
-  })
+    if (!fromCityMatch) {
+      let fromNextPage = fromData.links.next
+      let newFromResponse = await fetch(fromNextPage)
+      let fromNewData = await newFromResponse.json()
+      fromData = fromNewData
+    }
+  }
 
-// Till-stads koordinater
-fetch('https://airportsapi.com/api/countries/SE/airports')
-  .then(result => result.json())
-  .then(async data => {
-    let cityMatch = false
-    let toLat = null
-    let toLong = null
+  // Till-stads koordinater
+  let toLat = null
+  let toLong = null
 
-    while (cityMatch === false) {
-      for (let i = 0; i < data.data.length; i++) {
-        let cityName = data.data[i].attributes.name
+  let toResponse = await fetch('https://airportsapi.com/api/countries/SE/airports')
+  let toData = await toResponse.json()
+  let toCityMatch = false
 
-        if (cityName.toLowerCase().includes(toCity.toLowerCase())) {
-          toLat = data.data[i].attributes.latitude
-          toLong = data.data[i].attributes.longitude
-          cityMatch = true
-          break;
-        }
-      }
+  while (toCityMatch === false) {
+    for (let i = 0; i < toData.data.length; i++) {
+      let toCityName = toData.data[i].attributes.name
 
-      if (!cityMatch) {
-        let nextPage = data.links.next
-        let newResponse = await fetch(nextPage)
-        let newData = await newResponse.json()
-        data = newData
+      if (toCityName.toLowerCase().includes(toCity.toLowerCase())) {
+        toLat = toData.data[i].attributes.latitude
+        toLong = toData.data[i].attributes.longitude
+        toCityMatch = true
+        break;
       }
     }
 
-    console.log(toLat)
-    console.log(toLong)
-  })
+    if (!toCityMatch) {
+      let toNextPage = toData.links.next
+      let toNewResponse = await fetch(toNextPage)
+      let toNewData = await toNewResponse.json()
+      toData = toNewData
+    }
+  }
+
+  let coordinates = {
+    'fromLat': fromLat,
+    'fromLong': fromLong,
+    'toLat': toLat,
+    'toLong': toLong
+  }
+
+  return coordinates
+}
+
+// Räkna ut avståndet mellan städerna
+const coordinates = await getCoordinates()
+
+console.log(coordinates.fromLat)
+
+// await function ()
