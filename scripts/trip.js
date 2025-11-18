@@ -222,11 +222,32 @@ flightTime()
 
 // Chart.js
 let chartCanvas = document.querySelector('#city-distance')
-let distance =
-  let dataToShow = {
-    'from': fromCity,
-    'to': toCity,
-    'distance': /* Ta fram distans mellan två städer och hård-koda dem här
-                för testning */
-                  
+
+let dataToShow = {
+  'from': fromCity,
+  'to': toCity,
+  'distance': 600
 }
+
+let chartData = {
+  labels: [dataToShow.from, dataToShow.to],
+  datasets: [
+    {
+      data: [dataToShow.distance, dataToShow.distance],
+      backgroundColor: ['blue', 'green']
+    }
+  ]
+}
+
+new Chart(chartCanvas, {
+  type: 'bar',
+  data: chartData,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false
+      }
+    }
+  }
+})

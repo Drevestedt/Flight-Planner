@@ -28,7 +28,7 @@
     <main>
       <!-- Flight info section -->
       <section id="result-info">
-        <h2>Flygrutt</h2>
+        <h2>Flyginfo</h2>
         <div class="data-display">
           <div class="from">
             <p>Från:</p>
@@ -41,17 +41,18 @@
           <div class="date-time">
             <p>Datum:</p>
           </div>
+          <div id="time">
+            <p id="flightTimeP">Ungefärlig flygtid minuter:</p>
+          </div>
           <button>Planera ny resa</button>
         </div>
       </section>
 
       <!-- Flight route info section -->
       <section id="chart">
-        <h2>Flyginfo</h2>
+        <h2>Stadsinfo</h2>
         <div class="data-display">
-          <div id="time">
-            <p id="flightTimeP">Ungefärlig flygtid minuter:</p>
-          </div>
+          <p>Befolkningsmängd</p>
           <canvas id="city-distance"></canvas>
         </div>
       </section>
@@ -60,10 +61,10 @@
     <!-- Footer -->
     <footer><p>&copy; 2025 Drevestedt:: Development</p></footer>
 
-    <!-- JS Script -->
-    <script src="/scripts/trip.js"></script>
-
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="/scripts/trip.js"></script>
   </body>
 </html>
