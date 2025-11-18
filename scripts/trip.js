@@ -114,7 +114,7 @@ clearNameLink.addEventListener('click', () => {
   window.location.href = 'index.html'
 })
 
-// Räkna ut ungefärlig flygtid och visa för användaren
+// Hämta koordinater
 async function getCoordinates() {
   // Från-stad koordinater
   let fromLat = null
@@ -182,9 +182,40 @@ async function getCoordinates() {
   return coordinates
 }
 
-// Räkna ut avståndet mellan städerna
-const coordinates = await getCoordinates()
+// Haversine-formel för att räkna ut avstånd mellan koordinater
+// Helt skriven av ChatGPT
+function haversine(lat1, long1, lat2, long2) {
+  const R = 6371; // Jordens radie i km
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (long2 - long1) * (Math.PI / 180);
 
-console.log(coordinates.fromLat)
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * (Math.PI / 180)) *
+    Math.cos(lat2 * (Math.PI / 180)) *
+    Math.sin(dLon / 2) ** 2;
 
-// await function ()
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c;
+}
+
+// Beräkna ungefärlig flygtid och visa för användaren
+async function flightTime() {
+  let coordinates = await getCoordinates()
+  const { fromLat, fromLong, toLat, toLong } = coordinates
+
+  let kmDistance = haversine(fromLat, fromLong, toLat, toLong)
+  let averageSpeed = 900
+  let flightTime = kmDistance / averageSpeed
+  let flightTimeMinutes = Math.round(flightTime * 60)
+
+  let flightTimeP = document.querySelector('#flightTimeP')
+  let newFlightTime = document.createElement('p')
+  newFlightTime.textContent = flightTimeMinutes
+  newFlightTime.style.marginRight = '2em'
+  newFlightTime.style.color = 'rgba(255, 255, 0, 0.861)'
+  flightTimeP.insertAdjacentElement('afterend', newFlightTime)
+}
+
+flightTime()
