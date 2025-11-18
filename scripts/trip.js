@@ -206,7 +206,7 @@ async function flightTime() {
   const { fromLat, fromLong, toLat, toLong } = coordinates
 
   let kmDistance = haversine(fromLat, fromLong, toLat, toLong)
-  let averageSpeed = 900
+  let averageSpeed = 450
   let flightTime = kmDistance / averageSpeed
   let flightTimeMinutes = Math.round(flightTime * 60)
 
@@ -221,3 +221,12 @@ async function flightTime() {
 flightTime()
 
 // Chart.js
+let chartCanvas = document.querySelector('#city-distance')
+let distance =
+  let dataToShow = {
+    'from': fromCity,
+    'to': toCity,
+    'distance': /* Ta fram distans mellan två städer och hård-koda dem här
+                för testning */
+                  
+}
