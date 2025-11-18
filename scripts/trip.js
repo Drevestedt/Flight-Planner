@@ -219,3 +219,5 @@ async function flightTime() {
 }
 
 flightTime()
+
+// Chart.js

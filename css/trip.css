@@ -161,6 +161,11 @@ main > * {
   align-items: center;
 }
 
+#time {
+  display: flex;
+  gap: 0.5em;
+}
+
 /* Footer */
 footer {
   background-color: #1e90ff;
