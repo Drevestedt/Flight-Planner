@@ -223,11 +223,15 @@ flightTime()
 // Chart.js
 let chartCanvas = document.querySelector('#city-distance')
 
+let citiesAPI = JSON.parse(localStorage.getItem('cities'))
+let population1 = citiesAPI.find(city => city.name === fromCity)?.population
+let population2 = citiesAPI.find(city => city.name === toCity)?.population
+
 let dataToShow = {
   'from': fromCity,
   'to': toCity,
-  'population1': 549839,
-  'population2': 1372565
+  'population1': population1,
+  'population2': population2
 }
 
 let chartData = {

@@ -10,16 +10,20 @@ tripPage.addEventListener('click', (e) => {
   }
 })
 
-// Hämta städerna från API:et och lägg till dem i drop-down menyerna
+/* Hämta städerna från API:et och lägg till dem i drop-down menyerna, samt
+hämta ut population data */
 fetch('https://avancera.app/cities/')
   .then(response => response.json())
   .then(cities => {
+    // for access in trip.html/js
+    localStorage.setItem('cities', JSON.stringify(cities))
+
     let fromDestination = document.querySelector('#dest-from')
     let toDestination = document.querySelector('#dest-to')
 
     for (let i = 0; i < cities.length; i++) {
-      let city = cities[i]
-      let cityName = city.name
+      let cityInfo = cities[i]
+      let cityName = cityInfo.name
 
       let fromOption = document.createElement('option')
       fromOption.textContent = `${cityName}`
