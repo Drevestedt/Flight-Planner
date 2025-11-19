@@ -221,24 +221,52 @@ async function flightTime() {
 flightTime()
 
 // Chart.js
-let chartCanvas = document.querySelector('#city-distance')
+let chartCanvas = document.querySelector('#elevation')
 
-let citiesAPI = JSON.parse(localStorage.getItem('cities'))
-let population1 = citiesAPI.find(city => city.name === fromCity)?.population
-let population2 = citiesAPI.find(city => city.name === toCity)?.population
+async function elevation() {
+  const airports = []
+
+  const response = await fetch('https://airportsapi.com/api/countries/SE/airports')
+  const data = await response.json()
+
+  airports.push(...data.data)
+
+  let next = data.links?.next
+
+  let airportMatch = airports.find(i => i.city === fromCity)
+
+  if (airportMatch) return airportMatch
+
+  while (next) {
+    let newResponse = await fetch(next)
+    let newData = await newResponse.json()
+
+    airports.push(...newData.data)
+    next = newData.links?.next
+
+    airportMatch = airports.find(i => i.city === fromCity)
+
+    if (airportMatch) return airportMatch
+  }
+
+  return null
+}
+
+// let elevation1 = .find
+// let elevation2 = .find
 
 let dataToShow = {
   'from': fromCity,
   'to': toCity,
-  'population1': population1,
-  'population2': population2
+  // 'elevation1': ,
+  // 'elevation2': 
 }
 
 let chartData = {
   labels: [dataToShow.from, dataToShow.to],
   datasets: [
     {
-      data: [dataToShow.population1, dataToShow.population2],
+      data: [dataToShow., dataToShow.],
       backgroundColor: ['rgba(220, 220, 0, 0.86)', 'rgba(220, 220, 0, 0.86)']
     }
   ]

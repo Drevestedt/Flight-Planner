@@ -35,8 +35,6 @@ hämta ut population data */
 fetch('https://avancera.app/cities/')
   .then(response => response.json())
   .then(cities => {
-    // for access in trip.html/js
-    localStorage.setItem('cities', JSON.stringify(cities))
 
     let fromDestination = document.querySelector('#dest-from')
     let toDestination = document.querySelector('#dest-to')
