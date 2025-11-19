@@ -226,15 +226,16 @@ let chartCanvas = document.querySelector('#city-distance')
 let dataToShow = {
   'from': fromCity,
   'to': toCity,
-  'distance': 600
+  'population1': 549839,
+  'population2': 1372565
 }
 
 let chartData = {
   labels: [dataToShow.from, dataToShow.to],
   datasets: [
     {
-      data: [dataToShow.distance, dataToShow.distance],
-      backgroundColor: ['blue', 'green']
+      data: [dataToShow.population1, dataToShow.population2],
+      backgroundColor: ['rgba(220, 220, 0, 0.86)', 'rgba(220, 220, 0, 0.86)']
     }
   ]
 }
@@ -244,6 +245,30 @@ new Chart(chartCanvas, {
   data: chartData,
   options: {
     responsive: true,
+    scales: {
+      x: {
+        ticks: {
+          color: '#f7fafc',
+          font: {
+            size: '16'
+          }
+        },
+        grid: {
+          color: '#f7fafc'
+        }
+      },
+      y: {
+        ticks: {
+          color: '#f7fafc',
+          font: {
+            size: '16'
+          }
+        },
+        grid: {
+          color: '#f7fafc'
+        }
+      }
+    },
     plugins: {
       legend: {
         display: false
