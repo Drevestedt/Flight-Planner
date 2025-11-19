@@ -75,6 +75,50 @@ main > * {
   z-index: 2;
 }
 
+/* Custom Alert Modal overlay */
+#alert-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f7fafc;
+  font-size: 150%;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+/* Custom Alert Modal alert box */
+#alert-box {
+  background: #2d3748;
+  padding: 2em;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 300px;
+}
+
+/* Custom Alert Modal alert message */
+#alert-message {
+  color: rgba(255, 255, 0, 0.861);
+  margin-bottom: 2em;
+}
+
+/* Custom Alert Modal button */
+#alert-ok-button {
+  padding: 0.5em 2em;
+  background-color: #1e90ff;
+  color: #f7fafc;
+  font-size: 70%;
+  border: none;
+  border-radius: 5px;
+  font-weight: 550;
+}
+
+#alert-ok-button:hover {
+  background-color: #1673cf;
+  color: #d2d3d3;
+}
+
 /* Hero section */
 #hero {
   background-color: #00bfa6;
