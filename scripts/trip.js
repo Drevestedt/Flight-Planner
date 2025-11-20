@@ -100,16 +100,10 @@ clearButton.addEventListener('click', () => {
 })
 
 // Rensa flygrutt från local storage och gå till start-sidan
-// Via länkar i Navbaren
+// Via länk i Navbaren
 let clearLink = document.querySelector('#navLinkOne')
-let clearNameLink = document.querySelector('h1')
 
 clearLink.addEventListener('click', () => {
-  localStorage.clear()
-  window.location.href = 'index.html'
-})
-
-clearNameLink.addEventListener('click', () => {
   localStorage.clear()
   window.location.href = 'index.html'
 })
@@ -269,7 +263,6 @@ async function findAirport() {
 
 async function elevation() {
   let airportResults = await findAirport()
-  console.log(airportResults)
 
   let elevation1 = airportResults.airportMatch1.attributes.elevation
   let elevation2 = airportResults.airportMatch2.attributes.elevation
