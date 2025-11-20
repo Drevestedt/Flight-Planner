@@ -223,88 +223,110 @@ flightTime()
 // Chart.js
 let chartCanvas = document.querySelector('#elevation')
 
-async function elevation() {
-  const airports = []
+async function findAirport() {
+  let airports = []
 
   const response = await fetch('https://airportsapi.com/api/countries/SE/airports')
-  const data = await response.json()
+  let data = await response.json()
 
   airports.push(...data.data)
 
+  let airportMatch1 = airports.find(i => i.attributes.name.toLowerCase().
+    includes(fromCity.toLowerCase()))
+
+  let airportMatch2 = airports.find(i => i.attributes.name.toLowerCase().
+    includes(toCity.toLowerCase()))
+
+  if (airportMatch1 && airportMatch2) {
+
+    return { airportMatch1, airportMatch2 }
+  }
+
   let next = data.links?.next
-
-  let airportMatch = airports.find(i => i.city === fromCity)
-
-  if (airportMatch) return airportMatch
 
   while (next) {
     let newResponse = await fetch(next)
     let newData = await newResponse.json()
 
     airports.push(...newData.data)
+
+    let airportMatch1 = airports.find(i => i.attributes.name.toLowerCase().
+      includes(fromCity.toLowerCase()))
+
+    let airportMatch2 = airports.find(i => i.attributes.name.toLowerCase().
+      includes(toCity.toLowerCase()))
+
+    if (airportMatch1 && airportMatch2) {
+
+      return { airportMatch1, airportMatch2 }
+    }
+
     next = newData.links?.next
-
-    airportMatch = airports.find(i => i.city === fromCity)
-
-    if (airportMatch) return airportMatch
   }
 
   return null
 }
 
-// let elevation1 = .find
-// let elevation2 = .find
+async function elevation() {
+  let airportResults = await findAirport()
+  console.log(airportResults)
 
-let dataToShow = {
-  'from': fromCity,
-  'to': toCity,
-  // 'elevation1': ,
-  // 'elevation2': 
-}
+  let elevation1 = airportResults.airportMatch1.attributes.elevation
+  let elevation2 = airportResults.airportMatch2.attributes.elevation
 
-let chartData = {
-  labels: [dataToShow.from, dataToShow.to],
-  datasets: [
-    {
-      data: [dataToShow., dataToShow.],
-      backgroundColor: ['rgba(220, 220, 0, 0.86)', 'rgba(220, 220, 0, 0.86)']
-    }
-  ]
-}
+  let dataToShow = {
+    'from': fromCity,
+    'to': toCity,
+    'elevation1': elevation1,
+    'elevation2': elevation2
+  }
 
-new Chart(chartCanvas, {
-  type: 'bar',
-  data: chartData,
-  options: {
-    responsive: true,
-    scales: {
-      x: {
-        ticks: {
-          color: '#f7fafc',
-          font: {
-            size: '16'
+  let chartData = {
+    labels: [dataToShow.from, dataToShow.to],
+    datasets: [
+      {
+        data: [dataToShow.elevation1, dataToShow.elevation2],
+        backgroundColor: ['rgba(220, 220, 0, 0.86)', 'rgba(220, 220, 0, 0.86)']
+      }
+    ]
+  }
+
+  new Chart(chartCanvas, {
+    type: 'bar',
+    data: chartData,
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          ticks: {
+            color: '#f7fafc',
+            font: {
+              size: '16'
+            }
+          },
+          grid: {
+            color: '#f7fafc'
           }
         },
-        grid: {
-          color: '#f7fafc'
+        y: {
+          ticks: {
+            color: '#f7fafc',
+            font: {
+              size: '16'
+            }
+          },
+          grid: {
+            color: '#f7fafc'
+          }
         }
       },
-      y: {
-        ticks: {
-          color: '#f7fafc',
-          font: {
-            size: '16'
-          }
-        },
-        grid: {
-          color: '#f7fafc'
+      plugins: {
+        legend: {
+          display: false
         }
       }
-    },
-    plugins: {
-      legend: {
-        display: false
-      }
     }
-  }
-})
+  })
+}
+
+elevation()
