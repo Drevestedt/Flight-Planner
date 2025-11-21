@@ -20,16 +20,41 @@
           <li><a href="index.html">Hem</a></li>
           <li id="tripPage"><a href="trip.html">Min resa</a></li>
           <li><a href="index.html">Planera ny resa</a></li>
-          <li><a href="#">Uppdatera städer</a></li>
+          <li><a href="#">Stads info</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
       <section id="hero">
-        <h2>Uppdatera städer</h2>
+        <h2>Sök/Uppdatera stad</h2>
+        <form action="" method="POST">
+          <div id="city-search">
+            <input type="search" placeholder="Sök efter stad" />
+            <button>Sök</button>
+          </div>
 
-        <form action="" method="POST"></form>
+          <div id="city-info">
+            <div id="name-city">
+              <label for="city-name">Namn:</label>
+              <input type="text" id="city-name" />
+            </div>
+
+            <div id="population-city">
+              <label for="city-population">Invånarantal:</label>
+              <input type="text" id="city-population" />
+            </div>
+          </div>
+
+          <div id="update-delete">
+            <input
+              type="submit"
+              value="Uppdatera/Lägg till stad"
+              id="update-button"
+            />
+            <input type="submit" value="Ta bort stad" id="remove-button" />
+          </div>
+        </form>
       </section>
     </main>
 
