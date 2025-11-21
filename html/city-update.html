@@ -26,9 +26,18 @@
     </header>
 
     <main>
+      <!-- Custom Alert Modal -->
+      <div id="alert-modal-overlay">
+        <div id="alert-box">
+          <p id="alert-message"></p>
+          <button id="alert-ok-button">Ok</button>
+        </div>
+      </div>
+
+      <!-- Info section -->
       <section id="hero">
         <h2>Sök/Uppdatera stad</h2>
-        <form action="" method="POST">
+        <form action="#" method="POST">
           <div id="city-search">
             <input type="search" placeholder="Sök efter stad" />
             <button>Sök</button>
@@ -60,5 +69,8 @@
 
     <!-- Footer -->
     <footer><p>&copy; 2025 Drevestedt:: Development</p></footer>
+
+    <!-- Scripts -->
+    <script src="/scripts/city-update.js"></script>
   </body>
 </html>
