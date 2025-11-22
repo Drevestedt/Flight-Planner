@@ -29,3 +29,23 @@ tripPage.addEventListener('click', (e) => {
     showCustomAlert('Du har ingen planerad resa.')
   }
 })
+
+// Sök efter stad
+async function citySearch() {
+  let response = await fetch('https://avancera.app/cities/')
+  let data = await response.json()
+
+  let searchInput = document.querySelector('#city-search input')
+  let searchButton = document.querySelector('#city-search button')
+  let cityNameField = document.querySelector('#city-name')
+  let populationField = document.querySelector('#city-population')
+
+  searchButton.addEventListener('click', () => {
+    let searchValue = searchInput.value
+
+    if (data.find(cityName => cityName.name === searchValue)) {
+      cityNameField.value = searchValue
+      populationField.value = 
+    }
+  })
+}
