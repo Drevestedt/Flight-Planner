@@ -42,10 +42,17 @@ async function citySearch() {
 
   searchButton.addEventListener('click', () => {
     let searchValue = searchInput.value
-
-    if (data.find(cityName => cityName.name === searchValue)) {
-      cityNameField.value = searchValue
-      populationField.value = 
+    let cityObject = data.find(cityName => cityName.name.toLowerCase() ===
+      searchValue.toLowerCase())
+    if (cityObject) {
+      cityNameField.value = cityObject.name
+      populationField.value = cityObject.population
+    } else {
+      showCustomAlert('Ingen stad hittades.')
+      cityNameField.value = ''
+      populationField.value = ''
     }
   })
 }
+
+citySearch()
