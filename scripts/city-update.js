@@ -56,3 +56,52 @@ async function citySearch() {
 }
 
 citySearch()
+
+// Stadsredigering
+let cityNameField = document.querySelector('#city-name')
+let populationField = document.querySelector('#city-population')
+let addCityBtn = document.querySelector('#city-add-button')
+let updateCityBtn = document.querySelector('#update-button')
+
+function createCity() {
+  let name = cityNameField.value.trim()
+  let population = Number(populationField.value.trim())
+
+  let addCity = {
+    'name': name,
+    'population': population
+  }
+
+  fetch('https://avancera.app/cities/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(addCity)
+  })
+}
+
+addCityBtn.addEventListener('click', createCity)
+
+function updateCity() {
+  let name = cityNameField.value.trim()
+  let population = Number(populationField.value.trim())
+
+  fetch('https://avancera.app/cities/')
+  // Loopa igenom för att hitta matchande stad
+
+  let updateCity = {
+    'name': name,
+    'population': population
+  }
+
+  fetch('https://avancera.app/cities/', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updateCity)
+  })
+}
+
+// updateCityBtn.addEventListener('click', updateCity)
