@@ -117,8 +117,16 @@ main > * {
 #result-info .date-time {
   display: flex;
   gap: 0.5em;
-  margin-top: 1em;
+  margin-top: 0.5em;
   margin-left: 5em;
+  margin-bottom: 0;
+}
+
+#time {
+  display: flex;
+  gap: 0.5em;
+  margin-left: 2em;
+  margin-bottom: 1em;
 }
 
 #result-info button {
@@ -129,7 +137,6 @@ main > * {
   border: none;
   border-radius: 5px;
   font-weight: 550;
-  margin-top: 3em;
 }
 
 #result-info button:hover {
@@ -159,11 +166,6 @@ main > * {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-#time {
-  display: flex;
-  gap: 0.5em;
 }
 
 /* Footer */
