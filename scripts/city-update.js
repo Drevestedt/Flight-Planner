@@ -61,9 +61,11 @@ citySearch()
 // Stadsredigering
 let addCityBtn = document.querySelector('#city-add-button')
 let updateCityBtn = document.querySelector('#update-button')
+let deleteCityBtn = document.querySelector('#remove-button')
 
 function createCity() {
   let name = cityNameField.value.trim()
+  name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
   let population = Number(populationField.value.replace(/\s+/g, '').trim())
 
   let addCity = {
@@ -88,20 +90,52 @@ function updateCity() {
   let population = Number(populationField.value.replace(/\s+/g, '').trim())
 
   fetch('https://avancera.app/cities/')
-  // Loopa igenom för att hitta matchande stad
+    .then(response => response.json())
+    .then(data => {
+      let matchingCity = data.find(city => city.name === name)
+      let cityId = matchingCity.id
 
-  let updateCity = {
-    'name': name,
-    'population': population
-  }
+      if (matchingCity) {
+        let updateCity = {
+          'name': matchingCity.name,
+          'population': population
+        }
 
-  fetch('https://avancera.app/cities/', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updateCity)
-  })
+        console.log("ID:", cityId)
+        console.log("Name:", matchingCity.name)
+        console.log("Population:", population)
+        console.log("Body som skickas:", updateCity)
+
+        fetch(`https://avancera.app/cities/${cityId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updateCity)
+        })
+      } else {
+        showCustomAlert('Staden hittades inte.')
+      }
+    })
 }
 
-// updateCityBtn.addEventListener('click', updateCity)
+updateCityBtn.addEventListener('click', updateCity)
+
+function deleteCity() {
+  let name = cityNameField.value.trim()
+
+  fetch('https://avancera.app/cities/')
+    .then(response => response.json())
+    .then(data => {
+      let matchingCity = data.find(city => city.name === name)
+      let city = matchingCity.name
+      let cityId = matchingCity.id
+
+      fetch(`https://avancera.app/cities/${cityId}`, {
+        method: 'DELETE'
+      })
+      showCustomAlert(`You have deleted: ${city}`)
+    })
+}
+
+deleteCityBtn.addEventListener('click', deleteCity)
