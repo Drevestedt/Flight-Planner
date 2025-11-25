@@ -222,7 +222,7 @@ main > * {
   margin-top: 0;
 }
 
-#add-button {
+#city-add-button {
   padding: 0.5em 1em;
   font-size: 70%;
   background-color: #1e90ff;
@@ -233,7 +233,7 @@ main > * {
   margin-right: 3em;
 }
 
-#add-button:hover {
+#city-add-button:hover {
   background-color: #1673cf;
   color: #d2d3d3;
 }

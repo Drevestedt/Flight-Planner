@@ -30,6 +30,9 @@ tripPage.addEventListener('click', (e) => {
   }
 })
 
+let cityNameField = document.querySelector('#city-name')
+let populationField = document.querySelector('#city-population')
+
 // Sök efter stad
 async function citySearch() {
   let response = await fetch('https://avancera.app/cities/')
@@ -37,8 +40,6 @@ async function citySearch() {
 
   let searchInput = document.querySelector('#city-search input')
   let searchButton = document.querySelector('#city-search button')
-  let cityNameField = document.querySelector('#city-name')
-  let populationField = document.querySelector('#city-population')
 
   searchButton.addEventListener('click', () => {
     let searchValue = searchInput.value
@@ -58,14 +59,12 @@ async function citySearch() {
 citySearch()
 
 // Stadsredigering
-let cityNameField = document.querySelector('#city-name')
-let populationField = document.querySelector('#city-population')
 let addCityBtn = document.querySelector('#city-add-button')
 let updateCityBtn = document.querySelector('#update-button')
 
 function createCity() {
   let name = cityNameField.value.trim()
-  let population = Number(populationField.value.trim())
+  let population = Number(populationField.value.replace(/\s+/g, '').trim())
 
   let addCity = {
     'name': name,
@@ -79,13 +78,14 @@ function createCity() {
     },
     body: JSON.stringify(addCity)
   })
+    .then(showCustomAlert(`Du har lagt till: ${name}`))
 }
 
 addCityBtn.addEventListener('click', createCity)
 
 function updateCity() {
   let name = cityNameField.value.trim()
-  let population = Number(populationField.value.trim())
+  let population = Number(populationField.value.replace(/\s+/g, '').trim())
 
   fetch('https://avancera.app/cities/')
   // Loopa igenom för att hitta matchande stad
