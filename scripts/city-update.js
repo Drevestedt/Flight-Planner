@@ -98,13 +98,9 @@ function updateCity() {
       if (matchingCity) {
         let updateCity = {
           'name': matchingCity.name,
-          'population': population
+          'population': population,
+          'id': cityId
         }
-
-        console.log("ID:", cityId)
-        console.log("Name:", matchingCity.name)
-        console.log("Population:", population)
-        console.log("Body som skickas:", updateCity)
 
         fetch(`https://avancera.app/cities/${cityId}`, {
           method: 'PUT',
@@ -134,7 +130,7 @@ function deleteCity() {
       fetch(`https://avancera.app/cities/${cityId}`, {
         method: 'DELETE'
       })
-      showCustomAlert(`You have deleted: ${city}`)
+      showCustomAlert(`Du har tagit bort: ${city}`)
     })
 }
 
