@@ -30,10 +30,10 @@ tripPage.addEventListener('click', (e) => {
   }
 })
 
+// Sök efter stad
 let cityNameField = document.querySelector('#city-name')
 let populationField = document.querySelector('#city-population')
 
-// Sök efter stad
 async function citySearch() {
   let response = await fetch('https://avancera.app/cities/')
   let data = await response.json()
@@ -109,6 +109,8 @@ function updateCity() {
           },
           body: JSON.stringify(updateCity)
         })
+
+        showCustomAlert(`Du har uppdaterat: ${matchingCity.name}`)
       } else {
         showCustomAlert('Staden hittades inte.')
       }
@@ -119,6 +121,7 @@ updateCityBtn.addEventListener('click', updateCity)
 
 function deleteCity() {
   let name = cityNameField.value.trim()
+  let confirmation = false
 
   fetch('https://avancera.app/cities/')
     .then(response => response.json())
