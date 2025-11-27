@@ -121,8 +121,6 @@ updateCityBtn.addEventListener('click', updateCity)
 
 function deleteCity() {
   let name = cityNameField.value.trim()
-  // let confirmation = false
-  // Lägg till dubbelkoll för delete
 
   fetch('https://avancera.app/cities/')
     .then(response => response.json())
@@ -134,6 +132,7 @@ function deleteCity() {
       fetch(`https://avancera.app/cities/${cityId}`, {
         method: 'DELETE'
       })
+
       showCustomAlert(`Du har tagit bort: ${city}`)
     })
 }
