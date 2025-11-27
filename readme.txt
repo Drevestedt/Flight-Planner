@@ -23,7 +23,8 @@ Webbplats-inspiration:
 
 ## Bildkälla:
 
-- Unsplash (unsplash.com)
+- Bakgrundsbild: Unsplash (unsplash.com)
+- Favicon: ChatGPT renderad
 
 Funktioner för framtida uppdateringar:
 
