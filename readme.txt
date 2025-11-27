@@ -1,7 +1,7 @@
 Flight Planner Sweden
 
 Kort beskrivning av webbplatsen:
-- Användaren kan söka och planera flyresa mellan två svenska städer
+- Användaren kan söka och planera flygresa mellan två svenska städer
 
 - Användaren får sedan fram info om vald resa innehållande: 
   Från vilken stad och flygplats, till vilken stad och flygplats, valt datum,
