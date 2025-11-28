@@ -18,13 +18,13 @@
 
 ## Webbplats-inspiration:
 
-- Skyscanner (skyscanner.se)
-- Flygresor.se (flygresor.se)
+- [Skyscanner](https://www.skyscanner.se/)
+- [Flygresor.se](https://www.flygresor.se/)
 - Liknande resesök-sidor
 
 ## Bildkälla:
 
-- Bakgrundsbild: Unsplash (unsplash.com)
+- Bakgrundsbild: [Unsplash](https://unsplash.com/)
 - Favicon: ChatGPT renderad
 
 ## Funktioner för framtida uppdateringar:
