@@ -18,7 +18,7 @@ function showCustomAlert(message) {
   })
 }
 
-// Kolla att det finns en planerad resa sparad innan sidan kan fås tillgång till
+// Kolla att det finns en planerad resa sparad innan sidan kan fås tillgång till
 let tripPage = document.querySelector('#tripPage')
 
 tripPage.addEventListener('click', (e) => {
@@ -30,33 +30,29 @@ tripPage.addEventListener('click', (e) => {
   }
 })
 
-// Sök efter stad
+// Sök efter stad
+let searchInput = document.querySelector('#city-search input')
 let cityNameField = document.querySelector('#city-name')
 let populationField = document.querySelector('#city-population')
+let searchButton = document.querySelector('#city-search button')
 
-async function citySearch() {
+searchButton.addEventListener('click', async function citySearch() {
   let response = await fetch('https://avancera.app/cities/')
   let data = await response.json()
 
-  let searchInput = document.querySelector('#city-search input')
-  let searchButton = document.querySelector('#city-search button')
 
-  searchButton.addEventListener('click', () => {
-    let searchValue = searchInput.value
-    let cityObject = data.find(cityName => cityName.name.toLowerCase() ===
-      searchValue.toLowerCase())
-    if (cityObject) {
-      cityNameField.value = cityObject.name
-      populationField.value = cityObject.population
-    } else {
-      showCustomAlert('Ingen stad hittades.')
-      cityNameField.value = ''
-      populationField.value = ''
-    }
-  })
-}
-
-citySearch()
+  let searchValue = searchInput.value
+  let cityObject = data.find(cityName => cityName.name.toLowerCase() ===
+    searchValue.toLowerCase())
+  if (cityObject) {
+    cityNameField.value = cityObject.name
+    populationField.value = cityObject.population
+  } else {
+    showCustomAlert('Ingen stad hittades.')
+    cityNameField.value = ''
+    populationField.value = ''
+  }
+})
 
 // Stadsredigering
 let addCityBtn = document.querySelector('#city-add-button')
@@ -81,6 +77,8 @@ function createCity() {
     body: JSON.stringify(addCity)
   })
     .then(showCustomAlert(`Du har lagt till: ${name}`))
+  cityNameField.value = ''
+  populationField.value = ''
 }
 
 addCityBtn.addEventListener('click', createCity)
@@ -115,6 +113,8 @@ function updateCity() {
         showCustomAlert('Staden hittades inte.')
       }
     })
+  cityNameField.value = ''
+  populationField.value = ''
 }
 
 updateCityBtn.addEventListener('click', updateCity)
@@ -132,8 +132,11 @@ function deleteCity() {
       fetch(`https://avancera.app/cities/${cityId}`, {
         method: 'DELETE'
       })
-
-      showCustomAlert(`Du har tagit bort: ${city}`)
+        .then(() => {
+          showCustomAlert(`Du har tagit bort: ${city}`)
+          cityNameField.value = ''
+          populationField.value = ''
+        })
     })
 }
 
